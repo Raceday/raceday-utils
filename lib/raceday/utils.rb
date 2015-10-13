@@ -1,5 +1,7 @@
 require "raceday/utils/version"
 require "raceday/utils/banker"
+require "raceday/presenter"
+require "raceday/decorator"
 
 require "raceday/data_object"
 
