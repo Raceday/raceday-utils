@@ -18,6 +18,10 @@ module Raceday
         def type
           @type ||= options[:type] || Object
         end
+
+        def instance_variable_name
+          "@#{ name }".to_sym
+        end
       end
     end
   end

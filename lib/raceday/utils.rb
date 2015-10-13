@@ -1,5 +1,7 @@
 require "raceday/utils/version"
-require_relative "./data_object"
+require "raceday/utils/banker"
+
+require "raceday/data_object"
 
 module Raceday
   module Utils

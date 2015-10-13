@@ -28,7 +28,11 @@ Gem::Specification.new do |spec|
   spec.add_dependency "activesupport",  ">= 4.0"
   spec.add_dependency "activemodel",    ">= 4.0"
 
-  spec.add_development_dependency "bundler", "~> 1.10"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "bundler",      "~> 1.10"
+  spec.add_development_dependency "rake",         "~> 10.0"
+  spec.add_development_dependency "rspec",        "~> 3.3.0"
+  spec.add_development_dependency "simplecov",    "~> 0.10.0"
+  spec.add_development_dependency "irbtools",     "~> 2.0.1"
+  spec.add_development_dependency "byebug",       "~> 6.0.2"
+  spec.add_development_dependency "guard-rspec",  "~> 4.6.4"
 end
