@@ -6,8 +6,8 @@ module Raceday
       extend ActiveSupport::Concern
 
       included do
-        class_attribute :ofi_bitwise_enumerations
-        self.ofi_bitwise_enumerations = {}
+        class_attribute :rd_bitwise_enumerations
+        self.rd_bitwise_enumerations = {}
       end
 
       ## General Class Methods ------------------------------
@@ -28,7 +28,7 @@ module Raceday
         ## => true | false
         ##
         def define_enum_tests(enum_name)
-          enumeration = ofi_bitwise_enumerations[enum_name][:values]
+          enumeration = rd_bitwise_enumerations[enum_name][:values]
 
           enumeration.each do |name, value|
             method_name = "#{ name }?".to_sym
@@ -56,7 +56,7 @@ module Raceday
           raise RuntimeError.new "The method #{ method_name } already exists on this class." if respond_to? method_name
 
           define_method method_name do
-            enumeration   = ofi_bitwise_enumerations[enum_name.to_sym][:values]
+            enumeration   = rd_bitwise_enumerations[enum_name.to_sym][:values]
             current_state = instance_variable_get "@#{ enum_name }".to_sym
 
             enumeration.select{ |k,v| (current_state | v == current_state) }.map{ |k,v| k }
@@ -77,7 +77,7 @@ module Raceday
           raise RuntimeError.new "The method #{ method_name } already exists on this class." if respond_to? method_name
 
           define_method method_name do
-            ofi_bitwise_enumerations[enum_name.to_sym][:values].map{ |k,v| k }
+            rd_bitwise_enumerations[enum_name.to_sym][:values].map{ |k,v| k }
           end
         end
 
@@ -94,7 +94,7 @@ module Raceday
           raise RuntimeError.new "The method #{ method_name } already exists on this class." if respond_to? method_name
 
           define_method method_name do |*values|
-            enumeration             = ofi_bitwise_enumerations[enum_name][:values].select{ |k,v| values.flatten.include?(k) }
+            enumeration             = rd_bitwise_enumerations[enum_name][:values].select{ |k,v| values.flatten.include?(k) }
             instance_variable_name  = "@#{ enum_name }".to_sym
 
             ## Using a Bitwise "|" (OR) we will combine all of our flags
@@ -108,7 +108,7 @@ module Raceday
           options     = enum_values.extract_options!
           enumeration = build_enumeration_from(enum_values)
 
-          ofi_bitwise_enumerations[enum_name.to_sym] = {
+          rd_bitwise_enumerations[enum_name.to_sym] = {
             values: enumeration,
             options: options
           }
