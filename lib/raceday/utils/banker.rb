@@ -6,10 +6,11 @@ module Raceday
       extend ActiveSupport::Concern
 
       # Instance Methods ----------------------------------
+      
       private # -------------------------------------------
 
       def banker_convert_to_dollars(value_in_cents)
-        "%0.2f" % ((value_in_cents || 0).to_d / 100)
+        Money.new(value).to_s
       end
 
       def banker_convert_to_cents(value_in_dollars)
